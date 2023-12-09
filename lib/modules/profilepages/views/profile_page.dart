@@ -52,7 +52,7 @@ class ProfilePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 5),
                 child: Center(
                   child: Text(
-                    'Mia Linues',
+                    'Hardik Rathod',
                     style: TextStyle(
                         color: AppColors.black,
                         fontSize: 25,
@@ -63,7 +63,7 @@ class ProfilePage extends StatelessWidget {
               ),
               const Center(
                 child: Text(
-                  'mialinues4@gmail.com',
+                  'hardikrathod@gmail.com',
                   style: TextStyle(
                       color: AppColors.black,
                       fontSize: 17,

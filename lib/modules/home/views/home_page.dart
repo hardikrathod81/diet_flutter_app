@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   List<String> listOfdays = ["M", "T", "W", "T", "F", "S", "S"];
-  int currentDateSelacted = 0;
+  int _currentSelactedIndex = 0;
   final ScrollController _scrollController = ScrollController();
 
   Future<void> _refresh() {
@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                               return InkWell(
                                 onTap: () {
                                   setState(() {
-                                    currentDateSelacted == index;
+                                    _currentSelactedIndex = index;
                                     selectedDate = DateTime.now()
                                         .add(Duration(days: index));
                                   });
@@ -157,12 +157,12 @@ class _HomePageState extends State<HomePage> {
                                         height: 20,
                                         width: 20,
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(4)),
-                                            color: currentDateSelacted == index
-                                                ? AppColors.orange
-                                                : AppColors.white),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(4)),
+                                          color: _currentSelactedIndex == index
+                                              ? AppColors.orange
+                                              : AppColors.white,
+                                        ),
                                         child: Center(
                                           child: Text(
                                             DateTime.now()
@@ -170,11 +170,12 @@ class _HomePageState extends State<HomePage> {
                                                 .day
                                                 .toString(),
                                             style: TextStyle(
-                                                color:
-                                                    currentDateSelacted == index
-                                                        ? AppColors.white
-                                                        : AppColors.gray,
-                                                fontWeight: FontWeight.w600),
+                                              color:
+                                                  _currentSelactedIndex == index
+                                                      ? AppColors.white
+                                                      : AppColors.gray,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                         ),
                                       )
