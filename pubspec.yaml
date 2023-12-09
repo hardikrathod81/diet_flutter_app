@@ -1,0 +1,67 @@
+name: diet_app
+description: A new Flutter project.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.1 <4.0.0'
+  flutter: '3.16.3'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  onboarding: ^3.1.0
+  table_calendar: ^3.0.9
+  flutter_onboarding_slider: ^1.0.9
+  flutter_bloc: ^8.1.3
+  connectivity: ^3.0.6
+  email_validator: ^2.1.17
+  http: ^1.1.0
+  bloc: ^8.1.2
+  equatable: ^2.0.5
+  sqflite: ^2.3.0
+  path_provider: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Light.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/Inter-SemiBold.ttf
+          weight: 700
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 800
+  assets:
+    - assets/images/fitcon_logo.png   
+    - assets/images/onboarding_screen_page1.png
+    - assets/images/onboarding_screen_page2.png
+    - assets/images/onboarding_screen_page3.png
+    - assets/images/onboarding_screen_page4.png    
+    - assets/images/brekfast1.jpeg  
+    - assets/images/brekfast2.jpeg  
+    - assets/images/brekfast3.jpeg  
+    - assets/images/profile.jpg
+    - assets/images/workout01.jpeg
+    - assets/images/workout02.jpeg
+    - assets/images/workout03.jpeg
+    - assets/images/workout04.jpeg
+    - assets/images/waterr_icon.ico
+    - assets/images/payment1.png
+    - assets/images/payment2.png
+    - assets/images/payment3.png
+    - assets/images/facebook.png
+    - assets/images/google.png
+
+
