@@ -23,5 +23,12 @@ A Flutter-based mobile application for managing diet plans, workouts, and mainta
 <img src="readme_resources/5.jpg" alt="Screenshot-5" width="300"/>
 <img src="readme_resources/6.jpg" alt="Screenshot-6" width="300"/>
 <img src="readme_resources/7.jpg" alt="Screenshot-7" width="300"/>
-
+<img src="readme_resources/8.jpg" alt="Screenshot-8" width="300"/>
+<img src="readme_resources/9.jpg" alt="Screenshot-9" width="300"/>
+<img src="readme_resources/10.jpg" alt="Screenshot-10" width="300"/>
+<img src="readme_resources/11.jpg" alt="Screenshot-11" width="300"/>
+<img src="readme_resources/12.jpg" alt="Screenshot-12" width="300"/>
+<img src="readme_resources/13.jpg" alt="Screenshot-13" width="300"/>
+<img src="readme_resources/14.jpg" alt="Screenshot-14" width="300"/>
+<img src="readme_resources/15.jpg" alt="Screenshot-15" width="300"/>
 
