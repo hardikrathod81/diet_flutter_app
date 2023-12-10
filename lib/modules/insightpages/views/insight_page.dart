@@ -39,9 +39,8 @@ class _InsightPageState extends State<InsightPage>
             return [
               SliverAppBar(
                 backgroundColor: AppColors.white,
-                expandedHeight: MediaQuery.sizeOf(context).height * 0.3,
-                automaticallyImplyLeading: false,
-                flexibleSpace: const FlexibleSpaceBar(),
+                expandedHeight: MediaQuery.sizeOf(context).height * 0.30,
+                flexibleSpace: Image.asset(AppImage.onboardingPageImage2),
               )
             ];
           },
@@ -60,6 +59,7 @@ class _InsightPageState extends State<InsightPage>
                       ),
                     ]),
                 child: TabBar(
+                  labelColor: AppColors.white,
                   indicatorSize: TabBarIndicatorSize.tab,
                   controller: _tabController,
                   unselectedLabelColor: AppColors.black,

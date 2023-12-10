@@ -49,14 +49,14 @@ flutter:
     - assets/images/onboarding_screen_page2.png
     - assets/images/onboarding_screen_page3.png
     - assets/images/onboarding_screen_page4.png    
-    - assets/images/brekfast1.jpeg  
-    - assets/images/brekfast2.jpeg  
-    - assets/images/brekfast3.jpeg  
+    - assets/images/brekfast1.jpg  
+    - assets/images/brekfast2.jpg  
+    - assets/images/brekfast3.jpg  
     - assets/images/profile.jpg
-    - assets/images/workout01.jpeg
-    - assets/images/workout02.jpeg
-    - assets/images/workout03.jpeg
-    - assets/images/workout04.jpeg
+    - assets/images/workout01.jpg
+    - assets/images/workout02.jpg
+    - assets/images/workout03.jpg
+    - assets/images/workout04.jpg
     - assets/images/waterr_icon.ico
     - assets/images/payment1.png
     - assets/images/payment2.png

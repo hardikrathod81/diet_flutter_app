@@ -25,7 +25,9 @@ class DietApp extends StatelessWidget {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(scaffoldBackgroundColor: AppColors.white),
+          theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.white,
+          ),
           home: const LogoPage(),
         ));
   }

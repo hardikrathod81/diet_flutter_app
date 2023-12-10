@@ -162,12 +162,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: SizedBox(
                       width: 150,
                       child: AppButton(
-                          value: 'Get Started',
-                          onPressed: () {
-                            Navigator.pushAndRemoveUntil(
-                                context, SigninPage.route(), (route) => false);
-                          },
-                          backgroundColor: AppColors.orange),
+                        value: 'Get Started',
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(
+                              context, SigninPage.route(), (route) => false);
+                        },
+                        backgroundColor: AppColors.orange,
+                      ),
                     ),
                   ),
                 )

@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import '../../../../core/app_images.dart';
 
 class LearnBasicPage extends StatefulWidget {
-  const LearnBasicPage({super.key});
+  const LearnBasicPage({
+    super.key,
+  });
 
   static MaterialPageRoute route() {
     return MaterialPageRoute(
@@ -167,7 +169,7 @@ class _LearnBasicPageState extends State<LearnBasicPage> {
                                     color: AppColors.black),
                                 TextWidgetTitle(
                                     text: nameofworkouts2[index],
-                                    fontSize: 15,
+                                    fontSize: 12,
                                     color: AppColors.gray),
                               ],
                             ),

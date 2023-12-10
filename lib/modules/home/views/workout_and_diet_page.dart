@@ -2,6 +2,7 @@ import 'package:diet_app/core/app_colors.dart';
 import 'package:diet_app/core/app_images.dart';
 import 'package:diet_app/modules/dietpages/views/diet_page.dart';
 import 'package:diet_app/modules/workoutpage/views/workout_page.dart';
+import 'package:diet_app/modules/workoutpage/workoutcategories/views/workout_categories.dart';
 import 'package:diet_app/widgets/app_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -100,7 +101,16 @@ class _WorkOutAndDietPageState extends State<WorkOutAndDietPage>
   @override
   void initState() {
     super.initState();
+    workoutimages;
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (String e in brekfastimage) {
+      precacheImage(AssetImage(e), context);
+    }
   }
 
   @override
@@ -235,7 +245,8 @@ class _WorkOutAndDietPageState extends State<WorkOutAndDietPage>
                       border: Border.all(color: AppColors.orange, width: 2)),
                   height: MediaQuery.sizeOf(context).height * 0.035,
                   child: TabBar(
-                      dividerColor: AppColors.orange,
+                      dividerHeight: 0,
+                      labelColor: AppColors.white,
                       unselectedLabelColor: AppColors.black,
                       indicatorSize: TabBarIndicatorSize.tab,
                       indicator: BoxDecoration(
@@ -267,9 +278,14 @@ class _WorkOutAndDietPageState extends State<WorkOutAndDietPage>
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: AppButton(
-                              value: 'Go t workout page',
+                              value: 'Go to workout page',
                               onPressed: () {
-                                Navigator.push(context, WorkOutPage.route());
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const WorkoutCategories(),
+                                    ));
                               },
                               backgroundColor: AppColors.orange),
                         )),
@@ -310,6 +326,7 @@ class _WorkOutAndDietPageState extends State<WorkOutAndDietPage>
                                           0.2,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
+                                            fit: BoxFit.cover,
                                             image: AssetImage(
                                                 workoutimages[index])),
                                       ),

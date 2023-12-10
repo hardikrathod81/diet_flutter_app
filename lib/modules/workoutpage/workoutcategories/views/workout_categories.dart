@@ -30,17 +30,17 @@ class _WorkoutCategoriesState extends State<WorkoutCategories>
   ];
 
   List<String> workoutnames = [
-    'Learn The Basic Trainig',
-    'Learn The Intermdeaite Trainig',
-    'Learn The Hard Trainig',
-    'Learn The Extra Hard Trainig'
+    'Learn The Basic Training',
+    'Learn The Intermediate Training',
+    'Learn The Hard Training',
+    'Learn The Extra Hard Training'
   ];
 
   List<String> workouttitle = [
-    '06 Workout Basic Trainig',
-    '06 Workoute Intermdeaite Trainig',
-    '06 WorkoutHard Trainig',
-    '06 WorkoutExtra Hard Trainig'
+    '06 Workout Basic Training',
+    '06 Workout Intermediate Training',
+    '06 Workout Hard Training',
+    '06 Workout Extra Hard Training'
   ];
 
   @override
@@ -58,133 +58,154 @@ class _WorkoutCategoriesState extends State<WorkoutCategories>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const TextWidget(text: 'Workout Categories'),
+      ),
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextWidget(text: 'Workout Categories'),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: TabBar(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: TabBar(
+                  dividerColor: AppColors.white,
+                  labelColor: AppColors.white,
                   labelPadding: const EdgeInsets.all(5),
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicatorWeight: 5,
                   indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: AppColors.orange),
+                    borderRadius: BorderRadius.circular(40),
+                    color: AppColors.orange,
+                  ),
                   unselectedLabelColor: AppColors.black,
                   controller: _tabController,
                   tabs: const [
                     SwapIndictor(text: 'Beginner', fontsize: 13),
                     SwapIndictor(text: 'Intermediate', fontsize: 13),
                     SwapIndictor(text: 'Advance', fontsize: 13)
-                  ]),
-            ),
-            Expanded(
-              child: TabBarView(controller: _tabController, children: [
-                SingleChildScrollView(
-                  child: Column(
+                  ],
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _buildWorkoutList(0),
+                    _buildWorkoutList(1),
+                    _buildWorkoutList(2),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWorkoutList(int tabIndex) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ListView.builder(
+            controller: _scrollController,
+            shrinkWrap: true,
+            itemExtent: 200,
+            itemCount: workoutimage.length,
+            itemBuilder: (context, index) {
+              // Generate a unique hero tag for each item
+              String heroTag = 'workout_hero_${tabIndex}_$index';
+
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LearnBasicPage(),
+                      ),
+                    );
+                  },
+                  child: Stack(
                     children: [
-                      ListView.builder(
-                        controller: _scrollController,
-                        shrinkWrap: true,
-                        itemExtent: 200,
-                        itemCount: workoutimage.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(context, LearnBasicPage.route());
-                              },
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                workoutimage[index]))),
+                      Hero(
+                        tag: heroTag,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(workoutimage[index]),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 120,
+                        left: 15,
+                        right: 10,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              workoutnames[index],
+                              style: const TextStyle(
+                                color: AppColors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  workouttitle[index],
+                                  style: const TextStyle(
+                                    color: AppColors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
                                   ),
-                                  Positioned(
-                                    top: 120,
-                                    left: 15,
-                                    right: 10,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: AppColors.white,
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: Row(
                                       children: [
-                                        Text(
-                                          workoutnames[index],
-                                          style: const TextStyle(
-                                              color: AppColors.white,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 20),
+                                        TextWidgetTitle(
+                                          text: 'Go Pro',
+                                          fontSize: 13,
+                                          color: AppColors.orange,
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              workouttitle[index],
-                                              style: const TextStyle(
-                                                  color: AppColors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 15),
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: AppColors.white),
-                                              child: const Padding(
-                                                padding: EdgeInsets.all(5),
-                                                child: Row(
-                                                  children: [
-                                                    TextWidgetTitle(
-                                                        text: 'Go Pro',
-                                                        fontSize: 13,
-                                                        color:
-                                                            AppColors.orange),
-                                                    Icon(
-                                                      Icons
-                                                          .local_fire_department_sharp,
-                                                      size: 15,
-                                                      color: AppColors.orange,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                        Icon(
+                                          Icons.local_fire_department_sharp,
+                                          size: 15,
+                                          color: AppColors.orange,
+                                        )
                                       ],
                                     ),
                                   ),
-                                ],
-                              ),
+                                )
+                              ],
                             ),
-                          );
-                        },
-                      )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                const Text('data'),
-                const Text('data')
-              ]),
-            )
-          ],
-        ),
-      )),
+              );
+            },
+          )
+        ],
+      ),
     );
   }
 }

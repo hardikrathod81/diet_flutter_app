@@ -33,6 +33,13 @@ class _WorkoutPlan1State extends State<WorkoutPlan1> {
     'Hip Lifts',
     'Jumaba'
   ];
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (String asse in workoutimage) {
+      precacheImage(AssetImage(asse), context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +48,7 @@ class _WorkoutPlan1State extends State<WorkoutPlan1> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              automaticallyImplyLeading: false,
               expandedHeight: MediaQuery.sizeOf(context).height * 0.45,
               flexibleSpace: Stack(
                 children: [

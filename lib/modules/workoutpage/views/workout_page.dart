@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../core/app_colors.dart';
 
 class WorkOutPage extends StatefulWidget {
-  const WorkOutPage({super.key});
+  const WorkOutPage({Key? key});
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute(
@@ -20,7 +20,7 @@ class WorkOutPage extends StatefulWidget {
 
 class _WorkOutPageState extends State<WorkOutPage>
     with TickerProviderStateMixin {
-  late TabController _tabController;
+  TabController? _tabController;
   List<String> workoutimage = [
     AppImage.workoutimage1,
     AppImage.workoutimage2,
@@ -29,20 +29,18 @@ class _WorkOutPageState extends State<WorkOutPage>
   ];
 
   List<String> workoutnames = [
-    'Learn The Basic Trainig',
-    'Learn The Intermdeaite Trainig',
-    'Learn The Hard Trainig',
-    'Learn The Extra Hard Trainig'
+    'Learn The Basic Training',
+    'Learn The Intermediate Training',
+    'Learn The Hard Training',
+    'Learn The Extra Hard Training'
   ];
 
   List<String> workouttitle = [
-    '06 Workout Basic Trainig',
-    '06 Workoute Intermdeaite Trainig',
-    '06 WorkoutHard Trainig',
-    '06 WorkoutExtra Hard Trainig'
+    '06 Workout Basic Training',
+    '06 Workout Intermediate Training',
+    '06 Workout Hard Training',
+    '06 Workout Extra Hard Training'
   ];
-
-  List<Widget> route = [const WorkoutPlan1()];
 
   @override
   void initState() {
@@ -51,15 +49,82 @@ class _WorkOutPageState extends State<WorkOutPage>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    workoutimage.forEach((image) {
+      precacheImage(AssetImage(image), context);
+    });
+  }
+
+  @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
+    _tabController;
+  }
+
+  Widget _buildWorkoutListView(List<String> images, int itemExtent) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.25,
+      width: MediaQuery.of(context).size.width * 1,
+      child: ListView.builder(
+        itemExtent: itemExtent.toDouble(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: images.length,
+        itemBuilder: (context, index) {
+          return Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: MediaQuery.of(context).size.width * 1,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fitWidth,
+                      image: AssetImage(images[index]),
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 120,
+                left: 20,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      workoutnames[index],
+                      style: const TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 17,
+                      ),
+                    ),
+                    Text(
+                      workouttitle[index],
+                      style: const TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: true,
         forceMaterialTransparency: true,
         backgroundColor: AppColors.white,
         centerTitle: true,
@@ -70,8 +135,9 @@ class _WorkOutPageState extends State<WorkOutPage>
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 backgroundColor: AppColors.white,
-                expandedHeight: MediaQuery.sizeOf(context).height * 0.4,
+                expandedHeight: MediaQuery.of(context).size.height * 0.4,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,111 +147,21 @@ class _WorkOutPageState extends State<WorkOutPage>
                             EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                         child: TextWidget(text: 'Today Workout Plan'),
                       ),
-                      Stack(
-                        children: [
-                          Column(
-                            children: [
-                              SizedBox(
-                                height:
-                                    MediaQuery.sizeOf(context).height * 0.25,
-                                width: MediaQuery.sizeOf(context).width * 1,
-                                child: ListView.builder(
-                                  itemExtent: 380,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: workoutimage.length,
-                                  itemBuilder: (context, index) {
-                                    return Hero(
-                                      tag: 'ff',
-                                      child: InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => route[0],
-                                            ),
-                                          );
-                                        },
-                                        child: Stack(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                              child: Container(
-                                                height:
-                                                    MediaQuery.sizeOf(context)
-                                                            .height *
-                                                        0.2,
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    fit: BoxFit.fitWidth,
-                                                    image: AssetImage(
-                                                      workoutimage[index],
-                                                    ),
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                ),
-                                              ),
-                                            ),
-                                            const Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 150),
-                                              child: Center(
-                                                child: CommonContainer(
-                                                    child: Column(
-                                                  children: [
-                                                    TextWidgetTitle(
-                                                      text: "Day 01",
-                                                      fontSize: 17,
-                                                      color: AppColors.black,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 10),
-                                                      child: TextWidgetTitle(
-                                                        text: "7:00 AM-8:00 AM",
-                                                        fontSize: 17,
-                                                        color: AppColors.black,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(
-                                    left: 10, right: 10, top: 10),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TextWidget(text: 'Workout Categoried'),
-                                    OrangeSellAllWidget(name: 'See all')
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                      _buildWorkoutListView(workoutimage, 380),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextWidget(text: 'Workout Categories'),
+                            OrangeSellAllWidget(name: 'See all'),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-              )
+              ),
             ];
           },
           body: Column(
@@ -193,20 +169,26 @@ class _WorkOutPageState extends State<WorkOutPage>
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: SizedBox(
-                  height: MediaQuery.sizeOf(context).height * 0.04,
-                  child: TabBar(
-                    unselectedLabelColor: AppColors.black,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    controller: _tabController,
-                    indicator: BoxDecoration(
+                child: Material(
+                  elevation: 0,
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.04,
+                    child: TabBar(
+                      dividerColor: AppColors.white,
+                      labelColor: AppColors.white,
+                      unselectedLabelColor: AppColors.black,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      controller: _tabController,
+                      indicator: BoxDecoration(
                         borderRadius: BorderRadius.circular(40),
-                        color: AppColors.orange),
-                    tabs: const [
-                      SwapIndictor(text: 'Beginner', fontsize: 13),
-                      SwapIndictor(text: 'Intermediate', fontsize: 13),
-                      SwapIndictor(text: 'Advance', fontsize: 13)
-                    ],
+                        color: AppColors.orange,
+                      ),
+                      tabs: const [
+                        SwapIndictor(text: 'Beginner', fontsize: 13),
+                        SwapIndictor(text: 'Intermediate', fontsize: 13),
+                        SwapIndictor(text: 'Advance', fontsize: 13),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -221,67 +203,7 @@ class _WorkOutPageState extends State<WorkOutPage>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.25,
-                              width: MediaQuery.sizeOf(context).width * 1,
-                              child: ListView.builder(
-                                itemExtent: 370,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount: workoutimage.length,
-                                itemBuilder: (context, index) {
-                                  return Stack(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Container(
-                                          height: MediaQuery.sizeOf(context)
-                                                  .height *
-                                              0.2,
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  1,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                                fit: BoxFit.fitWidth,
-                                                image: AssetImage(
-                                                  workoutimage[index],
-                                                )),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 120,
-                                        left: 20,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              workoutnames[index],
-                                              style: const TextStyle(
-                                                  color: AppColors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 17),
-                                            ),
-                                            Text(
-                                              workouttitle[index],
-                                              style: const TextStyle(
-                                                  color: AppColors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 15),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
+                            _buildWorkoutListView(workoutimage, 370),
                             const Padding(
                               padding: EdgeInsets.only(left: 10),
                               child: TextWidget(text: 'New Workout'),
@@ -290,7 +212,7 @@ class _WorkOutPageState extends State<WorkOutPage>
                               padding: const EdgeInsets.only(top: 10),
                               child: SizedBox(
                                 height:
-                                    MediaQuery.sizeOf(context).height * 0.15,
+                                    MediaQuery.of(context).size.height * 0.15,
                                 child: ListView.builder(
                                   itemExtent: 190,
                                   shrinkWrap: true,
@@ -303,18 +225,21 @@ class _WorkOutPageState extends State<WorkOutPage>
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 10),
                                           child: Container(
-                                            height: MediaQuery.sizeOf(context)
+                                            height: MediaQuery.of(context)
+                                                    .size
                                                     .height *
                                                 0.2,
-                                            width: MediaQuery.sizeOf(context)
+                                            width: MediaQuery.of(context)
+                                                    .size
                                                     .width *
                                                 1,
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: AssetImage(
-                                                    workoutimage[index],
-                                                  )),
+                                                fit: BoxFit.cover,
+                                                image: AssetImage(
+                                                  workoutimage[index],
+                                                ),
+                                              ),
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                             ),
@@ -330,15 +255,127 @@ class _WorkOutPageState extends State<WorkOutPage>
                         ),
                       ),
                     ),
-                    const Column(
-                      children: [Text('data')],
+                    SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildWorkoutListView(workoutimage, 370),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: TextWidget(text: 'New Workout'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
+                                child: ListView.builder(
+                                  itemExtent: 190,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: workoutimage.length,
+                                  itemBuilder: (context, index) {
+                                    return Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.2,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                1,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: AssetImage(
+                                                  workoutimage[index],
+                                                ),
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    const Column(
-                      children: [Text('data')],
-                    )
+                    SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildWorkoutListView(workoutimage, 370),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: TextWidget(text: 'New Workout'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.15,
+                                child: ListView.builder(
+                                  itemExtent: 190,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: workoutimage.length,
+                                  itemBuilder: (context, index) {
+                                    return Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.2,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                1,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: AssetImage(
+                                                  workoutimage[index],
+                                                ),
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

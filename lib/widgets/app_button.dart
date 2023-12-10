@@ -1,3 +1,4 @@
+import 'package:diet_app/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatefulWidget {
@@ -29,7 +30,7 @@ class _AppButtonState extends State<AppButton> {
         onPressed: widget.onPressed,
         child: Text(
           widget.value,
-          style: const TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16, color: AppColors.white),
         ),
       ),
     );
