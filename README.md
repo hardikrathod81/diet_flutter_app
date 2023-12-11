@@ -11,7 +11,7 @@ A Flutter-based mobile application for managing diet plans, workouts, and mainta
 ## Gif
 
 
- ![Alt text](readme_resources/Gif/screen1.gif)
+ ![Alt text](https://github.com/hardikrathod81/diet_flutter_app/blob/main/readme_resources/Gif/screen1.gif)
  
  ![Alt text](readme_resources/Gif/screen2.gif)
 

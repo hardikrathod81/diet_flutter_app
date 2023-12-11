@@ -1,12 +1,11 @@
 import 'package:diet_app/core/app_images.dart';
-import 'package:diet_app/modules/workoutpage/views/workoutplan_1.dart';
 import 'package:diet_app/widgets/app_widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/app_colors.dart';
 
 class WorkOutPage extends StatefulWidget {
-  const WorkOutPage({Key? key});
+  const WorkOutPage({super.key});
 
   static MaterialPageRoute<void> route() {
     return MaterialPageRoute(
@@ -51,9 +50,9 @@ class _WorkOutPageState extends State<WorkOutPage>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    workoutimage.forEach((image) {
+    for (var image in workoutimage) {
       precacheImage(AssetImage(image), context);
-    });
+    }
   }
 
   @override

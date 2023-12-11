@@ -1,7 +1,6 @@
 import 'package:diet_app/core/app_colors.dart';
 import 'package:diet_app/core/app_images.dart';
 import 'package:diet_app/modules/dietpages/views/diet_page.dart';
-import 'package:diet_app/modules/workoutpage/views/workout_page.dart';
 import 'package:diet_app/modules/workoutpage/workoutcategories/views/workout_categories.dart';
 import 'package:diet_app/widgets/app_widgets.dart';
 import 'package:flutter/material.dart';
